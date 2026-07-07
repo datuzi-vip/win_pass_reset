@@ -5,7 +5,12 @@ from __future__ import annotations
 from PySide6.QtCore import QEvent, QSize, Qt
 from PySide6.QtWidgets import QHBoxLayout, QLineEdit, QPushButton, QSizePolicy, QWidget
 
-from src.ui.widgets.eye_icon import build_eye_icon
+from src.ui.icons import load_svg_icon
+from src.ui.styles import COLOR_ICON_DEFAULT, COLOR_ICON_HOVER
+
+_EYE = "eye.svg"
+_EYE_OFF = "eye-off.svg"
+_ICON_SIZE = 18
 
 
 class PasswordInput(QWidget):
@@ -65,9 +70,9 @@ class PasswordInput(QWidget):
         return super().eventFilter(obj, event)
 
     def _update_icon(self) -> None:
-        self.toggle_btn.setIcon(
-            build_eye_icon(revealed=self._visible, hover=self._hover)
-        )
+        name = _EYE_OFF if self._visible else _EYE
+        color = COLOR_ICON_HOVER if self._hover else COLOR_ICON_DEFAULT
+        self.toggle_btn.setIcon(load_svg_icon(name, size=_ICON_SIZE, color=color))
         self.toggle_btn.setToolTip("隐藏密码" if self._visible else "显示密码")
 
     def _reset_visibility(self) -> None:

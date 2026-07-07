@@ -28,11 +28,9 @@ FILL_LIGHT = "#f5f7fa"
 
 RADIUS = "4px"
 
-# Re-export for icons module compatibility
+# Icon tint colors (used by icons.py and password_input)
 COLOR_ICON_DEFAULT = TEXT_SECONDARY
 COLOR_ICON_HOVER = PRIMARY
-COLOR_INFO = PRIMARY
-COLOR_WARNING = WARNING
 
 
 def load_stylesheet() -> str:

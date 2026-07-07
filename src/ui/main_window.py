@@ -52,9 +52,9 @@ class MainWindow(QWidget):
         root.addWidget(divider)
         root.addSpacing(18)
 
-        current_user = get_current_username()
-        self.self_tab = SelfPasswordTab(current_user)
-        self.admin_tab = AdminResetTab(current_user)
+        self._current_user = get_current_username()
+        self.self_tab = SelfPasswordTab(self._current_user)
+        self.admin_tab = AdminResetTab(self._current_user)
 
         self.tabs = QTabWidget()
         self.tabs.tabBar().setExpanding(False)
@@ -66,7 +66,6 @@ class MainWindow(QWidget):
             self.tabs.setCurrentIndex(1)
 
         self._wire_signals()
-        self.admin_tab.refresh()
 
     def _wire_signals(self) -> None:
         self.self_tab.actions.cancel_btn.clicked.connect(self.self_tab.clear_form)
@@ -106,7 +105,7 @@ class MainWindow(QWidget):
             return
 
         self._controller.change_own_password(
-            get_current_username(),
+            self._current_user,
             form.old_password,
             form.new_password,
             on_success=self._on_self_change_success,

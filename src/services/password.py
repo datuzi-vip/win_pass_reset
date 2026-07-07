@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import win32net
 
-from src.app.config import USER_INFO_PASSWORD
+# win32net.NetUserSetInfo level for password reset
+_USER_INFO_PASSWORD = 1003
 
 
 def change_own_password(
@@ -24,6 +25,6 @@ def admin_reset_password(
     win32net.NetUserSetInfo(
         server,
         username,
-        USER_INFO_PASSWORD,
+        _USER_INFO_PASSWORD,
         {"password": new_password},
     )

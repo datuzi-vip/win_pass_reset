@@ -9,12 +9,7 @@ from PySide6.QtGui import QIcon, QPainter, QPixmap
 from PySide6.QtSvg import QSvgRenderer
 from PySide6.QtWidgets import QApplication
 
-from src.ui.styles import (
-    COLOR_ICON_DEFAULT,
-    COLOR_ICON_HOVER,
-    COLOR_INFO,
-    COLOR_WARNING,
-)
+from src.ui.styles import COLOR_ICON_DEFAULT
 from src.utils.resources import resource_path
 
 _ICON_DIR = resource_path("resources", "icons")

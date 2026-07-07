@@ -12,6 +12,3 @@ WINDOW_DEFAULT_WIDTH = 520
 WINDOW_DEFAULT_HEIGHT = 560
 
 CLI_ADMIN_TAB = "--admin-tab"
-
-# win32net.NetUserSetInfo level for password reset
-USER_INFO_PASSWORD = 1003

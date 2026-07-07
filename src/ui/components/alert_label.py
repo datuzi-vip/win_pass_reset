@@ -7,7 +7,8 @@ from typing import Literal
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QFrame, QHBoxLayout, QLabel, QSizePolicy, QVBoxLayout, QWidget
 
-from src.ui.icons import COLOR_INFO, COLOR_WARNING, load_svg_pixmap
+from src.ui.icons import load_svg_pixmap
+from src.ui.styles import PRIMARY, WARNING
 
 AlertVariant = Literal["info", "warning"]
 
@@ -18,8 +19,8 @@ _ICON_FILES = {
     "warning": "triangle-alert.svg",
 }
 _ICON_COLORS = {
-    "info": COLOR_INFO,
-    "warning": COLOR_WARNING,
+    "info": PRIMARY,
+    "warning": WARNING,
 }
 
 

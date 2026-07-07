@@ -72,13 +72,25 @@ class AdminResetTab(QWidget):
         )
         layout.addWidget(self.actions)
 
+        self._admin = False
+        self._users_loaded = False
         self.refresh()
 
-    def refresh(self) -> None:
+    def refresh(self, *, force_users: bool = False) -> None:
         admin = is_user_admin()
+        admin_changed = admin != self._admin
+        self._admin = admin
+
         self.elevate_btn.setVisible(not admin)
         self.actions.set_primary_enabled(admin)
-        self._reload_users(admin)
+
+        if force_users or admin_changed or (admin and not self._users_loaded):
+            self._reload_users(admin)
+            self._users_loaded = admin
+        elif admin:
+            self.user_combo.setEnabled(True)
+        else:
+            self.user_combo.setEnabled(False)
 
     def _reload_users(self, admin: bool) -> None:
         self.user_combo.clear()
@@ -116,6 +128,8 @@ class AdminResetTab(QWidget):
         self.elevate_btn.setEnabled(enabled)
         self.actions.set_enabled(enabled)
         if enabled:
-            self.refresh()
+            self.elevate_btn.setVisible(not self._admin)
+            self.actions.set_primary_enabled(self._admin)
+            self.user_combo.setEnabled(self._admin)
         else:
             self.user_combo.setEnabled(False)
